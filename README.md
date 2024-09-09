@@ -25,6 +25,7 @@ This is a RESTful API built with Lumen for managing tasks with basic CRUD (Creat
 - `due_date`: Date, must be a future date
 - `created_at`: Timestamp
 - `updated_at`: Timestamp
+- `deleted_at`: Timestamp (soft delete)
 
 ## API Endpoints
 
@@ -101,11 +102,3 @@ The API enforces strict validation to ensure correct data types and required fie
 - **Title**: Must be unique and required.
 - **Due Date**: Must be a future date.
 - **Status**: Defaults to `pending` if not specified.
-
-## Contributing
-
-Feel free to fork the repository and submit pull requests. Please ensure that your code adheres to the coding standards and includes appropriate tests.
-
-## License
-
-This project is licensed under the MIT License.
