@@ -6,8 +6,6 @@ use App\Enums\TaskStatus;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -50,6 +48,16 @@ class TaskController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'status' => ['nullable', Rule::enum(TaskStatus::class)],
+            'due_date' => 'nullable|date',
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $query = Task::query();
 
         // Filter by status
