@@ -14,11 +14,9 @@
 */
 
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/tasks', 'TaskController@create');
         $router->get('/tasks', 'TaskController@index');
         $router->get('/tasks/{id}', 'TaskController@show');
         $router->put('/tasks/{id}', 'TaskController@update');
         $router->delete('/tasks/{id}', 'TaskController@delete');
-    });
 });

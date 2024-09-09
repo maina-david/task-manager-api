@@ -25,14 +25,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::define('update-task', function ($user, $task) {
-            return $user->id === $task->user_id;
-        });
-
-        Gate::define('delete-task', function ($user, $task) {
-            return $user->id === $task->user_id;
-        });
-
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->input('api_token')) {
                 return User::where('api_token', $request->input('api_token'))->first();

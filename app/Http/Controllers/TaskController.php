@@ -36,8 +36,7 @@ class TaskController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'status' => $request->input('status', TaskStatus::PENDING->value),
-            'due_date' => $request->input('due_date'),
-            'user_id' => Auth::id(),
+            'due_date' => $request->input('due_date')
         ]);
 
         return response()->json($task, 201);
@@ -107,9 +106,6 @@ class TaskController extends Controller
             return response()->json(['error' => 'Task not found'], 404);
         }
 
-        if (Gate::denies('update-task', $task)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
 
         $validator = Validator::make($request->all(), [
             'title' => 'sometimes|required|unique:tasks,title,' . $task->id . '|max:255',
@@ -144,10 +140,6 @@ class TaskController extends Controller
 
         if (!$task) {
             return response()->json(['error' => 'Task not found'], 404);
-        }
-
-        if (Gate::denies('delete-task', $task)) {
-            return response()->json(['error' => 'Unauthorized'], 403);
         }
 
         $task->delete();

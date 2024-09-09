@@ -16,9 +16,8 @@ class TaskSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(function () {
-            User::factory()
-                ->count(10)
-                ->has(Task::factory()->count(5))
+            Task::factory()
+                ->count(50)
                 ->create();
         });
     }

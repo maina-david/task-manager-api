@@ -19,7 +19,6 @@ class Task extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
         'title',
         'description',
         'status',
@@ -30,14 +29,4 @@ class Task extends Model
         'status' => TaskStatus::class,
         'due_date' => 'datetime',
     ];
-
-    /**
-     * Get the user that owns the Task
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
