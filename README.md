@@ -29,11 +29,154 @@ This is a RESTful API built with Lumen for managing tasks with basic CRUD (Creat
 
 ## API Endpoints
 
-- **POST** `/api/tasks`: Create a new task
-- **GET** `/api/tasks`: Retrieve all tasks (with optional filtering and pagination)
-- **GET** `/api/tasks/{id}`: Retrieve a specific task by ID
-- **PUT** `/api/tasks/{id}`: Update an existing task
-- **DELETE** `/api/tasks/{id}`: Delete a task
+### **POST** `/api/tasks`
+
+Create a new task.
+
+**Request Body:**
+
+```json
+{
+  "title": "Finish project report",
+  "description": "Complete the final report for the project.",
+  "status": "in-progress",
+  "due_date": "2024-09-30"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e",
+  "title": "Finish project report",
+  "description": "Complete the final report for the project.",
+  "status": "in-progress",
+  "due_date": "2024-09-30",
+  "created_at": "2024-09-01T12:00:00Z",
+  "updated_at": "2024-09-01T12:00:00Z",
+  "deleted_at": null
+}
+```
+
+### **GET** `/api/tasks`
+
+Retrieve all tasks with optional filtering and pagination.
+
+**Query Parameters:**
+
+- `status` (optional): Filter tasks by status.
+- `due_date` (optional): Filter tasks by due date.
+- `search` (optional): Search tasks by title.
+
+**Example Request:**
+
+```
+GET /api/tasks?status=in-progress&search=report
+```
+
+**Response:**
+
+```json
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": "e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e",
+      "title": "Finish project report",
+      "description": "Complete the final report for the project.",
+      "status": "in-progress",
+      "due_date": "2024-09-30",
+      "created_at": "2024-09-01T12:00:00Z",
+      "updated_at": "2024-09-01T12:00:00Z",
+      "deleted_at": null
+    }
+  ],
+  "first_page_url": "http://localhost:8000/api/tasks?page=1",
+  "from": 1,
+  "last_page": 1,
+  "last_page_url": "http://localhost:8000/api/tasks?page=1",
+  "next_page_url": null,
+  "path": "http://localhost:8000/api/tasks",
+  "per_page": 10,
+  "prev_page_url": null,
+  "to": 1,
+  "total": 1
+}
+```
+
+### **GET** `/api/tasks/{id}`
+
+Retrieve a specific task by ID.
+
+**Example Request:**
+
+```
+GET /api/tasks/e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e
+```
+
+**Response:**
+
+```json
+{
+  "id": "e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e",
+  "title": "Finish project report",
+  "description": "Complete the final report for the project.",
+  "status": "in-progress",
+  "due_date": "2024-09-30",
+  "created_at": "2024-09-01T12:00:00Z",
+  "updated_at": "2024-09-01T12:00:00Z",
+  "deleted_at": null
+}
+```
+
+### **PUT** `/api/tasks/{id}`
+
+Update an existing task.
+
+**Request Body:**
+
+```json
+{
+  "title": "Finish project report updated",
+  "description": "Update the final report for the project.",
+  "status": "completed",
+  "due_date": "2024-09-15"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e",
+  "title": "Finish project report updated",
+  "description": "Update the final report for the project.",
+  "status": "completed",
+  "due_date": "2024-09-15",
+  "created_at": "2024-09-01T12:00:00Z",
+  "updated_at": "2024-09-01T12:30:00Z",
+  "deleted_at": null
+}
+```
+
+### **DELETE** `/api/tasks/{id}`
+
+Delete a task.
+
+**Example Request:**
+
+```
+DELETE /api/tasks/e8f7c3b4-5c2d-4d08-85b3-3c9b7d3a6e5e
+```
+
+**Response:**
+
+```json
+{
+  "message": "Task deleted successfully"
+}
+```
 
 ## Setup Instructions
 
