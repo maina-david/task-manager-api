@@ -1,6 +1,6 @@
-# Project: Simple API for Task Management
+# Task Management API
 
-This is a RESTful API built with Lumen to manage tasks with basic CRUD (Create, Read, Update, Delete) operations.
+This is a RESTful API built with Lumen for managing tasks with basic CRUD (Create, Read, Update, Delete) operations. It includes functionality for creating, updating, deleting, and retrieving tasks with filtering and pagination options.
 
 ## Requirements
 
@@ -8,31 +8,33 @@ This is a RESTful API built with Lumen to manage tasks with basic CRUD (Create, 
 - PostgreSQL database
 - Composer
 
-### Features
+## Features
 
-- Create, update, delete, and retrieve tasks.
-- Tasks can be filtered by `status` and `due_date`.
-- Pagination and search functionality for task listings.
+- **Task Management**: Create, update, delete, and retrieve tasks.
+- **Filtering**: Filter tasks by `status` and `due_date`.
+- **Search**: Search tasks by `title`.
+- **Pagination**: Paginate task listings with 10 items per page.
+- **Validation**: Enforces validation rules for task creation and updates.
 
-### Task Model
+## Task Model
 
-- `id`: Integer, auto-increment
+- `id`: UUID
 - `title`: String, required, unique
 - `description`: Text, optional
-- `status`: Enum (pending, completed), defaults to pending
+- `status`: Enum (`pending`, `in-progress`, `completed`), defaults to `pending`
 - `due_date`: Date, must be a future date
 - `created_at`: Timestamp
 - `updated_at`: Timestamp
 
-### API Endpoints
+## API Endpoints
 
-- `POST /tasks`: Create a new task
-- `GET /tasks`: Retrieve all tasks (with optional filtering and pagination)
-- `GET /tasks/{id}`: Retrieve a specific task by ID
-- `PUT /tasks/{id}`: Update an existing task
-- `DELETE /tasks/{id}`: Delete a task
+- **POST** `/api/tasks`: Create a new task
+- **GET** `/api/tasks`: Retrieve all tasks (with optional filtering and pagination)
+- **GET** `/api/tasks/{id}`: Retrieve a specific task by ID
+- **PUT** `/api/tasks/{id}`: Update an existing task
+- **DELETE** `/api/tasks/{id}`: Delete a task
 
-### Setup Instructions
+## Setup Instructions
 
 1. **Clone the repository**:
 
@@ -42,6 +44,7 @@ This is a RESTful API built with Lumen to manage tasks with basic CRUD (Create, 
    ```
 
 2. **Install dependencies**:
+
    Run the following command to install all project dependencies via Composer:
 
    ```bash
@@ -49,6 +52,7 @@ This is a RESTful API built with Lumen to manage tasks with basic CRUD (Create, 
    ```
 
 3. **Configure environment variables**:
+
    Create a `.env` file by copying the `.env.example`:
 
    ```bash
@@ -67,23 +71,41 @@ This is a RESTful API built with Lumen to manage tasks with basic CRUD (Create, 
    ```
 
 4. **Run database migrations**:
+
    Run the migration to create the `tasks` table:
 
    ```bash
    php artisan migrate
    ```
 
-5. **Serve the application**:
+5. **Seed the database** (Optional):
+
+   To populate the database with sample data, run:
+
+   ```bash
+   php artisan db:seed
+   ```
+
+6. **Serve the application**:
+
    Start the Lumen server:
 
    ```bash
    php -S localhost:8000 -t public
    ```
-  
-### Validation
 
-The API enforces strict validation to ensure the correct data types and required fields for each request:
+## Validation
 
-- Tasks must have a unique `title`.
-- `due_date` must be in the future.
-- Status defaults to `pending`.
+The API enforces strict validation to ensure correct data types and required fields:
+
+- **Title**: Must be unique and required.
+- **Due Date**: Must be a future date.
+- **Status**: Defaults to `pending` if not specified.
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests. Please ensure that your code adheres to the coding standards and includes appropriate tests.
+
+## License
+
+This project is licensed under the MIT License.
