@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function create(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:tasks,title,|max:255',
+            'title' => 'required|unique:tasks,title|max:255',
             'description' => 'nullable|string',
             'status' => ['required', Rule::enum(TaskStatus::class)],
             'due_date' => 'required|date|after:today',
