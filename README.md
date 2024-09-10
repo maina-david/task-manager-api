@@ -4,7 +4,7 @@ This is a RESTful API built with Lumen for managing tasks with basic CRUD (Creat
 
 ## Requirements
 
-- PHP >= 7.3
+- PHP >= 8.1
 - PostgreSQL database
 - Composer
 
